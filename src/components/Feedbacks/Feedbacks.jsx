@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Statistics from './FeedbackStatistic';
 import css from './FeedbacksStyles.module.css';
+import FeedbackOptions from './FeedbackOptions';
 
 class Feedbacks extends Component {
     constructor() {
@@ -34,7 +36,7 @@ class Feedbacks extends Component {
         return totalFeedbacks;
     }
     countPositiveFeedbackPercentage = () => {
-        let positivePercentage = Math.ceil(this.state.good * 100 / this.countTotalFeedback());
+        let positivePercentage = Math.floor(this.state.good * 100 / this.countTotalFeedback());
         if (isNaN(positivePercentage)) {
             return 0
         }
@@ -46,21 +48,19 @@ class Feedbacks extends Component {
     return (
       <div className={css.feedback_wrapper}>
             <h2 className={css.feedback_header}>Please, leave your feedback!</h2>
-        <div className={css.feedback_buttons}>
-                <button className={css.good_button} onClick={this.onGoodClick}>Good</button>
-                <button className={css.neutral_button} onClick={this.onNeutralClick}>Neutral</button>
-                <button className={css.bad_button} onClick={this.onBadClick}>Bad</button>
-            </div>
-            <div className={css.statistic_container}>
-                <h2 className={css.statistic_header}>Feedback statistics:</h2>
-                <span className={css.counter_good}>Good: {this.state.good}</span>
-                <span className={css.counter_neutral}>Neutral: {this.state.neutral}</span>
-                <span className={css.counter_bad}>Bad: {this.state.bad}</span>
-                <span className={css.counter_total}>Total: {this.countTotalFeedback()}</span>
-                <span className={css.counter_percentage}>Positive feedback: {this.countPositiveFeedbackPercentage()}%</span>
-                
-            </div>
-        
+            <FeedbackOptions
+                onGoodClick={this.onGoodClick}
+                onNeutralClick={this.onNeutralClick}
+                onBadClick={this.onBadClick}
+            />
+
+            <Statistics
+                goodValue={this.state.good}
+                neutralValue={this.state.neutral}
+                badValue={this.state.bad}
+                totalFeedbackValue={this.countTotalFeedback()}
+                percentageValue={this.countPositiveFeedbackPercentage()}
+            />
       </div>
     );
   }

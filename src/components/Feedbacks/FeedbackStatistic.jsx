@@ -1,30 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import css from './FeedbacksStyles.module.css';
 
-class Statistics extends Component {
-    countTotalFeedback = ({good, neutral, bad}) => {
-        let totalFeedbacks = this.state.good + this.state.neutral + this.state.bad;
-        return totalFeedbacks;
-    }
-    countPositiveFeedbackPercentage = () => {
-        let positivePercentage = Math.floor(this.state.good * 100 / this.countTotalFeedback());
-        if (isNaN(positivePercentage)) {
-            return 0
-        }
-        return positivePercentage;
-    }
+const Statistics = ({goodValue, neutralValue, badValue, totalFeedbackValue, percentageValue}) => (
 
-    render() {
-        return (
-            <div>
-                <span className={css.counter_good}>Good: {this.state.good}</span>
-                <span className={css.counter_neutral}>Neutral: {this.state.neutral}</span>
-                <span className={css.counter_bad}>Bad: {this.state.bad}</span>
-                <span className={css.counter_total}>Total: {this.countTotalFeedback()}</span>
-                <span className={css.counter_percentage}>Positive feedback: {this.countPositiveFeedbackPercentage()}%</span>
+<div className={css.statistic_container}>
+                <h2 className={css.statistic_header}>Feedback statistics:</h2>
+                <span className={css.counter_good}>Good: {goodValue}</span>
+                <span className={css.counter_neutral}>Neutral: {neutralValue}</span>
+                <span className={css.counter_bad}>Bad: {badValue}</span>
+                <span className={css.counter_total}>Total: {totalFeedbackValue}</span>
+                <span className={css.counter_percentage}>Positive feedback: {percentageValue}%</span>
+                
             </div>
-        );
-    }
-}
+)
 
 export default Statistics;
