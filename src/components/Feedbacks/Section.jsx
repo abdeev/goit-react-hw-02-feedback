@@ -1,6 +1,8 @@
+import css from './FeedbacksStyles.module.css';
+
 const Section = ({ title, children }) => (
         <section>
-            <h2>{title}</h2>
+            {title && <h2 className={css.feedback_header}>{title}</h2>}
             {children}
         </section>
 );

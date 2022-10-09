@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import NoFeedback from './NoFeedback';
+import Section from './Section';
+import FeedbackOptions from './FeedbackOptions';
 import Statistics from './FeedbackStatistic';
 import css from './FeedbacksStyles.module.css';
-import FeedbackOptions from './FeedbackOptions';
 
 class Feedbacks extends Component {
     constructor() {
@@ -13,6 +15,8 @@ class Feedbacks extends Component {
         };
 
     }
+    feedbackTitle = 'Please, leave your feedback!';
+    statisticTitle = '';
 
     onGoodClick = () => {
         this.setState(prevState => ({
@@ -47,20 +51,33 @@ class Feedbacks extends Component {
     render() {
     return (
       <div className={css.feedback_wrapper}>
-            <h2 className={css.feedback_header}>Please, leave your feedback!</h2>
-            <FeedbackOptions
-                onGoodClick={this.onGoodClick}
-                onNeutralClick={this.onNeutralClick}
-                onBadClick={this.onBadClick}
+            <Section
+                title={this.feedbackTitle}
+                children={
+                    <FeedbackOptions
+                        onGoodClick={this.onGoodClick}
+                        onNeutralClick={this.onNeutralClick}
+                        onBadClick={this.onBadClick}
+                    />}
             />
-
-            <Statistics
-                goodValue={this.state.good}
-                neutralValue={this.state.neutral}
-                badValue={this.state.bad}
-                totalFeedbackValue={this.countTotalFeedback()}
-                percentageValue={this.countPositiveFeedbackPercentage()}
-            />
+            {this.countTotalFeedback() === 0
+                ?
+                <Section
+                    title='Current statistic:'
+                    children={<NoFeedback message={'There is no feedback'}/>}/>
+                :
+                <Section
+                    title={this.statisticTitle}
+                    children={
+                        <Statistics
+                            goodValue={this.state.good}
+                            neutralValue={this.state.neutral}
+                            badValue={this.state.bad}
+                            totalFeedbackValue={this.countTotalFeedback()}
+                            percentageValue={this.countPositiveFeedbackPercentage()}
+                        />}
+                />
+            }
       </div>
     );
   }
