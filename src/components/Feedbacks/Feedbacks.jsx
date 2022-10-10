@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import NoFeedback from './NoFeedback';
-import Section from './Section';
-import FeedbackOptions from './FeedbackOptions';
-import Statistics from './FeedbackStatistic';
-import css from './FeedbacksStyles.module.css';
+import NoFeedback from '../NoFeedback/NoFeedback';
+import Section from '../Section/Section';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
+import Statistics from '../FeedbackStatistic/FeedbackStatistic';
+import css from './Feedbacks.module.css';
 
 class Feedbacks extends Component {
     constructor() {
@@ -49,6 +49,7 @@ class Feedbacks extends Component {
 
 
     render() {
+        const titleMessage = 'There is no feedback';
     return (
       <div className={css.feedback_wrapper}>
             <Section
@@ -64,7 +65,7 @@ class Feedbacks extends Component {
                 ?
                 <Section
                     title='Current statistic:'
-                    children={<NoFeedback message={'There is no feedback'}/>}/>
+                    children={<NoFeedback message={titleMessage}/>}/>
                 :
                 <Section
                     title={this.statisticTitle}

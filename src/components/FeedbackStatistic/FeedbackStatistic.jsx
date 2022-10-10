@@ -1,5 +1,6 @@
 import React from 'react';
-import css from './FeedbacksStyles.module.css';
+import PropTypes from 'prop-types';
+import css from './FeedbackStatistic.module.css';
 
 const Statistics = ({goodValue, neutralValue, badValue, totalFeedbackValue, percentageValue}) => (
 
@@ -13,5 +14,11 @@ const Statistics = ({goodValue, neutralValue, badValue, totalFeedbackValue, perc
                 
             </div>
 )
-
+Statistics.propTypes = {
+    goodValue:PropTypes.number.isRequired,
+    neutralValue: PropTypes.number.isRequired,
+    badValue: PropTypes.number.isRequired,
+    totalFeedbackValue: PropTypes.number,
+    percentageValue: PropTypes.number
+}
 export default Statistics;
