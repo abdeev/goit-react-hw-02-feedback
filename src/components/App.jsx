@@ -23,21 +23,6 @@ export class App extends Component {
       };
     });
   };
-  onGoodClick = () => {
-    this.setState(prevState => ({
-      good: (prevState.good += 1),
-    }));
-  };
-  onNeutralClick = () => {
-    this.setState(prevState => ({
-      neutral: (prevState.neutral += 1),
-    }));
-  };
-  onBadClick = () => {
-    this.setState(prevState => ({
-      bad: (prevState.bad += 1),
-    }));
-  };
   countTotalFeedback = () => {
     let totalFeedbacks = this.state.Good + this.state.Neutral + this.state.Bad;
     return totalFeedbacks;
