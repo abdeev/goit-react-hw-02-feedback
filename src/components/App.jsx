@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import NoFeedback from './NoFeedback/NoFeedback';
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
-import Statistics from './FeedbackStatistic/FeedbackStatistic';
+import Statistics from './Statistics/Statistics';
 import css from './App.module.css';
 
 export class App extends Component {
   constructor() {
     super();
     this.state = {
-      Good: 0,
-      Neutral: 0,
-      Bad: 0,
+      good: 0,
+      neutral: 0,
+      bad: 0,
     };
   }
   feedbackTitle = 'Please, leave your feedback!';
@@ -24,12 +24,12 @@ export class App extends Component {
     });
   };
   countTotalFeedback = () => {
-    let totalFeedbacks = this.state.Good + this.state.Neutral + this.state.Bad;
+    let totalFeedbacks = this.state.good + this.state.neutral + this.state.bad;
     return totalFeedbacks;
   };
   countPositiveFeedbackPercentage = () => {
     let positivePercentage = Math.floor(
-      (this.state.Good * 100) / this.countTotalFeedback()
+      (this.state.good * 100) / this.countTotalFeedback()
     );
     if (isNaN(positivePercentage)) {
       return 0;
@@ -39,12 +39,12 @@ export class App extends Component {
 
   render() {
     const titleMessage = 'There is no feedback';
-    const { Good, Neutral, Bad } = this.state;
+    const { good, neutral, bad } = this.state;
     return (
       <div className={css.feedback_wrapper}>
         <Section title={this.feedbackTitle}>
           <FeedbackOptions
-            options={['Good', 'Neutral', 'Bad']}
+            options={Object.keys(this.state)}
             onLeavefeedback={this.onLeaveFeedback}
           />
         </Section>
@@ -55,9 +55,9 @@ export class App extends Component {
         ) : (
           <Section title={this.statisticTitle}>
             <Statistics
-              goodValue={Good}
-              neutralValue={Neutral}
-              badValue={Bad}
+              goodValue={good}
+              neutralValue={neutral}
+              badValue={bad}
               totalFeedbackValue={this.countTotalFeedback()}
               percentageValue={this.countPositiveFeedbackPercentage()}
             />

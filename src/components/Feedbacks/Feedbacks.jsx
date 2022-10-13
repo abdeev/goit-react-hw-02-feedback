@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoFeedback from '../NoFeedback/NoFeedback';
 import Section from '../Section/Section';
 import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
-import Statistics from '../FeedbackStatistic/FeedbackStatistic';
+import Statistics from '../Statistics/Statistics';
 import css from './Feedbacks.module.css';
 
 class Feedbacks extends Component {
